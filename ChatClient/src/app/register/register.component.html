@@ -1,0 +1,108 @@
+<form #userForm="ngForm" (ngSubmit)="register()" class="md:flex
+justify-center px-10 md:px-20 bg-white gap-10">
+  <div class="h-auto w-3/5" style="background-image: url('/register.svg');
+background-repeat: no-repeat; background-size: contain; background-color: white;
+background-position: bottom">
+    div1
+  </div>
+  <div class="bg-white my-10 rounded md:w-1/4 flex flex-col gap-3 shadow-sm drop-shadow-md">
+    <div class="text-center">
+
+      <div class="flex justify-center">
+        <img [src]="profilePicture" class="rounded-full object-cover bg-blue-800 h-24 w-24"/>
+      </div>
+      <div class="text-2xl my-2 font-medium">
+        Register
+
+      </div>
+    </div>
+    <div class="w-full px-4">
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Email</mat-label>
+        <input #emailModel="ngModel"
+               [(ngModel)]="email" matInput
+               name="email"
+               placeholder="Email"
+               required
+        />
+        <mat-error *ngIf="emailModel.errors?.['required']">
+          Email is required.
+        </mat-error>
+
+
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>User Name</mat-label>
+        <input #userNameModel="ngModel"
+               [(ngModel)]="userName" matInput
+               name="userName"
+               placeholder="Username"
+               required
+
+        />
+        <mat-error *ngIf="userNameModel.errors?.['required']">
+          Username is required.
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Full Name</mat-label>
+        <input #fullNameModel="ngModel"
+               [(ngModel)]="fullName" matInput
+               name="fullName"
+               placeholder="Full Name"
+               required
+
+        />
+        <mat-error *ngIf="fullNameModel.errors?.['required']">
+          Full Name is required.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Password</mat-label>
+        <input #passwordModel="ngModel" [(ngModel)]="password" [type]="hide()?'text':'password'" matInput
+               name="password"
+               placeholder="Password"
+               required/>
+        <mat-icon (click)="togglePassword($event)" matSuffix>
+          {{ hide() ? 'visibility_off' : 'visibility' }}
+        </mat-icon>
+
+        <mat-error *ngIf="passwordModel.errors?.['required']">
+          Password is required.
+        </mat-error>
+      </mat-form-field>
+
+      <input #pic (change)="onFileSelected($event)" hidden placeholder="Profile Image" type="file"/>
+      <button (click)="pic.click()"
+              class="w-full flex items-center gap-2 justify-center mb-5 bg-red-900 text-white rounded-md p-2"
+
+              type="button">
+        <mat-icon>add_a_photo</mat-icon>
+        <span>Upload Image</span>
+      </button>
+
+      <!--      <button [disabled]="!userForm.valid" class="w-full mb-5 bg-blue-900 text-white rounded-md p-2 disabled:opacity-30"-->
+      <!--              mat-raised-button-->
+      <!--              type="submit">-->
+      <!--        Register-->
+      <!--      </button>-->
+
+      <app-button
+        (action)="register()"
+        [isDisabled]="!userForm.valid"
+        [isLoading]="authService.isLoading()"
+        [text]="'Register'"/>
+
+
+      <p class="font-bold text-xs text-center pb-10">
+        Already have an account? <a [routerLink]="'/login'" class="text-blue-500">Login</a>
+      </p>
+    </div>
+
+  </div>
+
+</form>
