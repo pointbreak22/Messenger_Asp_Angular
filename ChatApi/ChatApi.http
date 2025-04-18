@@ -1,0 +1,7 @@
+POST http://localhost:5000/api/account/register
+Content-Type: multipart/form-data
+
+fullName: sdsddssdds
+email: test@example.com
+password: Test@12
+userName: testuser

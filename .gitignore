@@ -1,0 +1,39 @@
+# Node.js (Angular)
+ChatClient/node_modules/
+ChatClient/dist/
+ChatClient/.angular/
+ChatClient/package-lock.json
+ChatClient/.env
+
+# .NET
+ChatApi/bin/
+ChatApi/obj/
+ChatApi/*.user
+ChatApi/*.suo
+ChatApi/.vs/
+ChatApi/appsettings.*.json
+ChatApi/.env
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS generated
+.DS_Store
+Thumbs.db
+
+# Docker
+uploads/
+*.tar
+*.pid
+
+# Rider / VS Code / JetBrains
+.idea/
+.vscode/
+*.sln.iml
+
+# Build artifacts
+publish/
+db_data/

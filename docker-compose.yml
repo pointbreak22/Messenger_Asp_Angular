@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .  # Корень проекта
+    ports:
+      - "80:80"     # Nginx (фронтенд)
+      - "5000:5000" # ASP.NET backend
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: "http://+:5000"  # Приложение будет слушать на порту 5000
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=ProjectChatDb;Username=postgres;Password=postgres"
+      JWTSetting__SecurityKey: "xyz2l303kkejoejeke23423sdfsf3r4wef4k044494kfgrerersdfe2r2errfewre4343434erererererererererr"
+      YOUR_DOMAIN: ${YOUR_DOMAIN}
+    depends_on:
+      - db
+    networks:
+      - webnet
+    volumes:
+      - ./uploads:/app/uploads  # Прокидываем volume для загрузки файлов
+
+  db:
+    image: postgres:17
+    restart: always
+    environment:
+      POSTGRES_DB: ProjectChatDb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - webnet
+
+networks:
+  webnet:
+    driver: bridge
+
+volumes:
+  db_data:
